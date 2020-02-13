@@ -1,4 +1,25 @@
 from math import floor
+from helpers import *
+
+def getMetadata(data, header):
+    metaDataDict = {}
+    for h in header:
+        metaDataDict[h] = computeMetadata(data[h])
+    return metaDataDict
+
+
+def computeMetadata(data):
+    count, mean, std, minValue, perc25, perc50, perc75, maxValue = computeBasics(data)
+    return {
+        "count": count,
+        "mean": mean,
+        "std": std,
+        "min": minValue,
+        "25": perc25,
+        "50": perc50,
+        "75": perc75,
+        "max": maxValue
+    }
 
 def computeBasics(data):
     count = 0
@@ -20,14 +41,6 @@ def computeBasics(data):
     perc50 = computePercentile(data, 0.5, count)
     perc75 = computePercentile(data, 0.75, count)
     return [count, mean, std, minValue, perc25, perc50, perc75, maxValue]
-
-def computeStd(data, mean, count):
-    std = 0
-    for d in data:
-        std += (d - mean)**2
-    std /= count
-    std = std**0.5
-    return std
 
 def computePercentile(data, percentile, count):
     rank = percentile * (count -1) - 1
