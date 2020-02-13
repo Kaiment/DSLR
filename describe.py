@@ -3,7 +3,7 @@ from compute_metadata import *
 import pprint
 
 def dataToDict():
-    data = genfromtxt("dataset_test.csv", delimiter=",", dtype=None)
+    data = genfromtxt("dataset_test.csv", delimiter=",", dtype=None, encoding="utf-8")
     header = data[0][6:]
     dataDict = {}
     for h in header:
