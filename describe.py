@@ -1,9 +1,9 @@
 from numpy import genfromtxt
-from compute_metadata import *
+from srcs.compute_metadata import *
 import pprint
 
 def dataToDict():
-    data = genfromtxt("dataset_test.csv", delimiter=",", dtype=None, encoding="utf-8")
+    data = genfromtxt("datasets/dataset_test.csv", delimiter=",", dtype=None, encoding="utf-8")
     header = data[0][6:]
     dataDict = {}
     for h in header:
