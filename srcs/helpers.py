@@ -1,7 +1,10 @@
 from numpy import genfromtxt
 
 def dataToDict(path, start_at):
-    data = genfromtxt(path, delimiter=",", dtype=None, encoding="utf-8").tolist()
+    try:
+        data = genfromtxt(path, delimiter=",", dtype=None, encoding="utf-8").tolist()
+    except:
+        exit("File not found, exiting...");
     header = data[0][start_at:]
     dataDict = {}
     for h in header:
