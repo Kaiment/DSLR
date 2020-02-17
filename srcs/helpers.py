@@ -4,7 +4,7 @@ def dataToDict(path, start_at):
     try:
         data = genfromtxt(path, delimiter=",", dtype=None, encoding="utf-8").tolist()
     except:
-        exit("File not found, exiting...");
+        exit("File not found, exiting...")
     header = data[0][start_at:]
     dataDict = {}
     for h in header:
