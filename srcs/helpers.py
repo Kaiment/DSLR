@@ -14,7 +14,10 @@ def dataToDict(path, start_at):
             try:
                 dataDict[header[j]].append(float(col))
             except:
-                dataDict[header[j]].append(0.0)
+                if col != '':
+                    dataDict[header[j]].append(col)
+                else:
+                    dataDict[header[j]].append(0.0)
     return dataDict
 
 def dataToList(path):
