@@ -1,4 +1,4 @@
-from srcs.helpers import dataToDict
+from helpers import dataToDict
 import matplotlib.pyplot as plt
 import copy
 
@@ -33,7 +33,7 @@ def createPairPlot(coursesData, course1, course2, i, j, axs):
 
 
 def getDataByCoursesAndHomes():
-    data = dataToDict("datasets/dataset_train.csv", 1)
+    data = dataToDict("../datasets/dataset_train.csv", 1)
     del data['First Name'], data['Last Name'], data['Birthday'], data['Best Hand']
     coursesData = initCoursesData()
     for i, house in enumerate(data['Hogwarts House']):

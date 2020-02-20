@@ -1,4 +1,5 @@
 from numpy import genfromtxt
+from numpy import exp
 
 def dataToDict(path, start_at):
     try:
@@ -30,3 +31,6 @@ def computeStd(data, mean, count):
     std /= count
     std = std**0.5
     return std
+
+def compiteSigmoid(x):
+        return 1 / (1 + exp(-x));
