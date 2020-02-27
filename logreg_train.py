@@ -120,8 +120,8 @@ class logisticRegression:
     def write_rates(self):
         res = np.concatenate((self.Ids, self.results), axis=1)
 
-        np.savetxt("weights.csv", res, delimiter=",", fmt="%f")
-        return self
+        np.savetxt("weights.csv", res, delimiter=",", fmt="%f")    
+        print("successfully saved weights in weights.csv")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

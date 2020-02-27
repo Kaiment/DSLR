@@ -23,6 +23,7 @@ class predict:
 
     def write_houses(self):
         np.savetxt("houses.csv", self.results, fmt="%s", delimiter=",")
+        print("successfully saved results in houses.csv")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
