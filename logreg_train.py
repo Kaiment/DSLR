@@ -20,6 +20,7 @@ class logisticRegression:
 
         for key, row in enumerate(data):
             try:
+                int(row[0])
                 float(row[self.X_0])
                 float(row[self.X_1])
                 rows.append(row)
@@ -52,11 +53,13 @@ class logisticRegression:
     def learn(self):
         # one vs all
         for house in self.houses:
+            self.Ids = np.array([[int(row[0])] for row in self.data])
             self.Y = np.array([[1] if row[self.headers.index("Hogwarts House")] == house else [0] for row in self.data])
-            self.X = np.array([[float(row[self.X_0]), float(row[self.X_1]), 1 if row[self.headers.index("Hogwarts House")] == house  else 0] for row in self.data])
+            self.X = np.array([[float(row[self.X_0]), float(row[self.X_1])] for row in self.data])
             self.theta = np.zeros((self.X.shape[1], 1))
             self.train()
             self.process_results()
+        return self
 
     def train(self):
         learningRate = 0.0001
@@ -75,12 +78,6 @@ class logisticRegression:
             self.results = np.append(self.results, predicted, axis = 1)
         else:
             self.results = predicted
-
-    def print_predictions(self):
-        predicted = self.predict(self.theta, self.X)
-        for key, val in enumerate(self.Y):
-            print("predicted: " + str(predicted[key][0]) + "; expected: " + str(int(val)))
-        return self
 
     def draw(self):
         trueSet = [];
@@ -104,18 +101,27 @@ class logisticRegression:
         plt.show()
         return self
 
+    def get_predicted_house(self, rates):
+        return self.houses[rates.argmax()]
+
     def compute_accuracy(self):
-        predicted = self.predict(self.theta, self.X)
         correct = 0
         total = self.X.shape[0]
 
-        for key, val in enumerate(self.Y):
-            if ((predicted[key][0] >= 0.5 and val == 1) or (predicted[key][0] < 0.5 and val == 0)):
+        for key, val in enumerate(self.data):
+            if self.get_predicted_house(self.results[key]) == val[1]:
                 correct += 1
 
         print("")
         print("Correctly predicted: " + str(correct) + " / " + str(total))
         print("Precision: " + str((100 * correct) / total) + " %")
+        return self
+
+    def write_rates(self):
+        res = np.concatenate((self.Ids, self.results), axis=1)
+
+        np.savetxt("weights.csv", res, delimiter=",", fmt="%f")
+        return self
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -123,6 +129,6 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     logisticObj = logisticRegression(args.dataset)
-    logisticObj.read().learn()
+    logisticObj.read().learn().compute_accuracy().write_rates()
 
-    print(logisticObj.results[0]) # probability for first student to be in each school (pick the highest) WARNING first student here might not be first one in the dataset
+    # print(logisticObj.results[0]) # probability for first student to be in each school (pick the highest) WARNING first student here might not be first one in the dataset
