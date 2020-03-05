@@ -1,5 +1,5 @@
 from math import floor
-from .helpers import *
+from helpers import *
 
 def getMetadata(data, header):
     metaDataDict = {}

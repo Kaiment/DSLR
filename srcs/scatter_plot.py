@@ -5,23 +5,16 @@ from matplotlib import pyplot
 if __name__ == "__main__":
     data = dataToDict("../datasets/dataset_train.csv", 6)
 
-    # pyplot.scatter(data["Arithmancy"], data["Astronomy"], marker='x', color="blue")
-    
-    i = 1
-    visited = []
-
-    for keyx, valx in data.items():
-        for keyy, valy in data.items():
-            if keyx != keyy and [keyx, keyy] not in visited and [keyy, keyx] not in visited:
-                visited.append([keyx, keyy])
-                pyplot.scatter(valx, valy, marker='x', color="purple")
-                pyplot.xlabel(keyx)
-                pyplot.ylabel(keyy)
-                pyplot.subplot(6, 13, i)
-                pyplot.tight_layout()
-                i += 1
-
-    print(len(visited))
-
-    # pyplot.legend(colors.keys())
+    i = 0;
+    fig, sub = pyplot.subplots(13, 13)
+    for keyX, valX in data.items():
+        j = 0
+        for keyY, valY in data.items():
+            if i == 12:
+                sub[i][j].set_xlabel(keyY)
+            if j == 0:
+                sub[i][j].set_ylabel(keyX)
+            sub[i][j].scatter(valX, valY, marker='x', color="purple")    
+            j += 1
+        i += 1
     pyplot.show()

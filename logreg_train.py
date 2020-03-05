@@ -130,5 +130,3 @@ if __name__ == "__main__":
     args = parser.parse_args()
     logisticObj = logisticRegression(args.dataset)
     logisticObj.read().learn().compute_accuracy().write_rates()
-
-    # print(logisticObj.results[0]) # probability for first student to be in each school (pick the highest) WARNING first student here might not be first one in the dataset

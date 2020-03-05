@@ -11,14 +11,11 @@ def main():
     plt.show()
 
 def createPairPlot(coursesData, course1, course2, i, j, axs):
-    #fig = plt.figure()
-    #a = fig.add_axes([0,0,1,1])
 
     if (j == 0):
-        #axs[i][j].set(ylabel = course1)
         axs[i][j].set_ylabel(course1, rotation=0)
     if (i == 12):
-        axs[i][j].set(xlabel = course2)
+        axs[i][j].set_xlabel(course2)
     if (i != j):
         axs[i][j].scatter(coursesData[course1]['Gryffindor'], coursesData[course2]['Gryffindor'], color='r', s=1)
         axs[i][j].scatter(coursesData[course1]['Hufflepuff'], coursesData[course2]['Hufflepuff'], color='b', s=1)
