@@ -79,28 +79,6 @@ class logisticRegression:
         else:
             self.results = predicted
 
-    def draw(self):
-        trueSet = [];
-        falseSet = [];
-
-        for key, val in enumerate(self.Y):
-            if val == 1:
-                trueSet.append(self.X[key])
-            else:
-                falseSet.append(self.X[key])
-
-        trueSet = np.array(trueSet)
-        falseSet = np.array(falseSet)
-
-        plt.scatter(trueSet[:,0], trueSet[:,1], color="green")
-        plt.scatter(falseSet[:,0], falseSet[:,1], color="red")
-
-        plt.title("scatter plot Houses")
-        plt.xlabel("Herbology")
-        plt.ylabel("Defense Against The Dark arts")
-        plt.show()
-        return self
-
     def get_predicted_house(self, rates):
         return self.houses[rates.argmax()]
 
@@ -129,4 +107,4 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     logisticObj = logisticRegression(args.dataset)
-    logisticObj.read().learn().compute_accuracy().write_rates()
+    logisticObj.read().learn().write_rates()
