@@ -22,6 +22,7 @@ class predict:
         return self
 
     def write_houses(self):
+        self.results = np.insert(self.results, 0, ["Index", "Hogwarts House"], axis=0)
         np.savetxt("houses.csv", self.results, fmt="%s", delimiter=",")
         print("successfully saved results in houses.csv")
 
