@@ -26,10 +26,13 @@ class predict:
         np.savetxt("houses.csv", self.results, fmt="%s", delimiter=",")
         print("successfully saved results in houses.csv")
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('weights', help="The weights csv file")
+    parser.add_argument("weights", help="The weights csv file")
 
     args = parser.parse_args()
     predictObj = predict(args.weights)
     predictObj.read().compute().write_houses()
+
+if __name__ == "__main__":
+    main()

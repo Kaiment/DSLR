@@ -101,10 +101,13 @@ class logisticRegression:
         np.savetxt("weights.csv", res, delimiter=",", fmt="%f")    
         print("successfully saved weights in weights.csv")
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('dataset', help="The training datatset")
 
     args = parser.parse_args()
     logisticObj = logisticRegression(args.dataset)
     logisticObj.read().learn().write_rates()
+
+if __name__ == "__main__":
+    main()

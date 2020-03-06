@@ -2,14 +2,6 @@ from helpers import dataToDict
 import matplotlib.pyplot as plt
 import copy
 
-def main():
-    coursesData = getDataByCoursesAndHomes()
-    fig, axs = plt.subplots(13, 13)
-    for i, course1 in enumerate(coursesData):
-        for j, course2 in enumerate(coursesData):
-            createPairPlot(coursesData, course1, course2, i, j, axs)
-    plt.show()
-
 def createPairPlot(coursesData, course1, course2, i, j, axs):
 
     if (j == 0):
@@ -62,6 +54,14 @@ def initCoursesData():
         'Flying': copy.deepcopy(houses)
     }
     return courses
+
+def main():
+    coursesData = getDataByCoursesAndHomes()
+    fig, axs = plt.subplots(13, 13)
+    for i, course1 in enumerate(coursesData):
+        for j, course2 in enumerate(coursesData):
+            createPairPlot(coursesData, course1, course2, i, j, axs)
+    plt.show()
 
 if __name__ == "__main__":
     main()
